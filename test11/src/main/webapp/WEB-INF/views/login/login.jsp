@@ -1,5 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
+<head>
+	<title>Login Page</title>
+</head>
+<jsp:include page="/WEB-INF/views/include/jsInclude.jsp"></jsp:include> 
 <script type="text/javascript">
 $(document).ready(function (){
 	
@@ -11,20 +15,14 @@ $(document).ready(function (){
 			alert("로그인 비밀번호를 입력해주세요");
 			$("#loginpwd").focus();
 		}else{
-			$("#loginfrm").attr("action", "<c:url value='/j_spring_security_check'/>");
 			$("#loginfrm").submit();
 		}
 	});
 		
 });
 </script>
-<html>
-<head>
-	<title>Login Page</title>
-</head>
-<body onload='document.f.j_username.focus();'>
+<body onload='document.loginfrm.loginid.focus();'>
 <h3>Login with Username and Password</h3>
-<%-- <form id="loginfrm" name="loginfrm" method="POST" action="${ctx}/j_spring_security"> --%>
 <form id="loginfrm" name="loginfrm" method="POST" action="/j_spring_security_check">
 <table>
    	<tr>

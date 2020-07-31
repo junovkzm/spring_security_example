@@ -1,4 +1,4 @@
-package or.gr.kr;
+package or.gr.kr.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -89,4 +89,17 @@ public class HomeController {
 		
 		return "home";
 	}
+	
+  class InstanceInner {
+
+  }
+
+  static class StaticInner {
+
+  }
+  
+  interface OpenCloseIf {
+	  
+  }
+  
 }
