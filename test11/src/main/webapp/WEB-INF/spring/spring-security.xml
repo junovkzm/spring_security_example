@@ -19,10 +19,9 @@
   <http pattern="/**/*.css" security="none"/>
   <http pattern="/images/*" security="none"/>
   <http auto-config="true" use-expressions="true">
-    <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
-    <intercept-url pattern="/user/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+    <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+    <intercept-url pattern="/user/**" access="hasAnyRole('USER','ADMIN')"/>
     <intercept-url pattern="/login.do" access="isAnonymous()"/>
-    <intercept-url pattern="/main.do" access="permitAll"/>
     <intercept-url pattern="/**" access="permitAll"/>
      <form-login
 		username-parameter="loginid"
@@ -31,15 +30,22 @@
 		default-target-url="/main.do"
 		authentication-failure-url="/login.do?fail=true"
     />
-<!-- 		authentication-success-handler-ref="customAuthenticationSuccessHandler" -->
-<!-- 		authentication-failure-handler-ref="customAuthenticationFailureHandler" -->
+    <logout 
+		logout-success-url="/main.do"
+		delete-cookies="JSESSIONID"
+	/>
   </http>
+  
   <authentication-manager>
-    <authentication-provider>
-      <user-service>
-        <user name="user1" password="user1password" authorities="ROLE_USER"/>
-        <user name="admin1" password="admin1password" authorities="ROLE_ADMIN"/>
-      </user-service>
-    </authentication-provider>
+    <authentication-provider user-service-ref="customJdbcDaoImpl" />
   </authentication-manager>
+
+  <beans:bean id="customJdbcDaoImpl" class="or.gr.kr.common.security.jdbc.CustomJdbcDaoImpl">
+	<beans:property name="dataSource" ref="dataSource" />
+	<beans:property name="rolePrefix" value="" />
+	<beans:property name="usersByUsernameQuery" value="SELECT ID, PASSWORD, NAME FROM MEMBERINFO WHERE ID=?" />
+	<beans:property name="authoritiesByUsernameQuery" value="SELECT AUTHORITY FROM MEMBER_AUTHORITY WHERE ID=?" />
+	<beans:property name="enableGroups" value="false" />
+</beans:bean>
+
 </beans:beans>

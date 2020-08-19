@@ -1,0 +1,69 @@
+CREATE TABLE `authority` (
+	`id` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`AUTHORITY` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci'
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `groups` (
+	`ID` INT(11) NULL DEFAULT NULL,
+	`GROUP_NAME` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci'
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `groups_authority` (
+	`GROUP_ID` INT(11) NULL DEFAULT NULL,
+	`AUTHORITY` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci'
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `groups_member` (
+	`GROUP_ID` INT(11) NULL DEFAULT NULL,
+	`MEMBER_ID` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci'
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `memberinfo` (
+	`ID` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`PASSWORD` VARCHAR(300) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`NAME` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8_general_ci'
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `member_authority` (
+	`ID` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`AUTHORITY` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci'
+)
+COMMENT='회원-권한 테이블\r\n\r\n'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `secured_resource` (
+	`RESOURCE_ID` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`RESOURCE_NAME` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`RESOURCE_PATTERN` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`RESOURCE_TYPE` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`SORT_ORDER` INT(11) NULL DEFAULT NULL
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `secured_resource_authority` (
+	`RESOURCE_ID` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`AUTHORITY` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`NAME` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8_general_ci'
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
