@@ -6,10 +6,13 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import or.gr.kr.vo.MemberInfo;
 
 /**
  * Handles requests for the application home page.
@@ -60,6 +63,8 @@ public class HomeController {
 	public String userMain(Locale locale, Model model) {
 		logger.info("Welcome home! USER!!!!!!!!!!!!!! The client locale is {}.", locale);
 		
+		MemberInfo user = (MemberInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
@@ -90,16 +95,4 @@ public class HomeController {
 		return "home";
 	}
 	
-  class InstanceInner {
-
-  }
-
-  static class StaticInner {
-
-  }
-  
-  interface OpenCloseIf {
-	  
-  }
-  
 }

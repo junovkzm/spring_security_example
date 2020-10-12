@@ -19,7 +19,6 @@ if(principal != null && principal instanceof MemberInfo){
 	id = ((MemberInfo)principal).getId();
 }
 %>
-
 <html>
 <head>
 <title>Home</title>
